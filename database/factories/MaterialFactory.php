@@ -20,6 +20,7 @@ class MaterialFactory extends Factory
         return [
             'name' => $name,
             'slug' => $slug,
+            'description' => $this->faker->sentence,
             'content' => 'something',
             'category_id' => Category::get()->random()->id,
             'user_id' => User::get()->random()->id
