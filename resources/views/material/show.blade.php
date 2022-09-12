@@ -9,18 +9,23 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-10">
                     <h5 class="card-title">{{ $material->name }}</h5>
                     <p class="card-text">{!! $material->content !!}</p>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-2">
                     @if ($material->user_id == auth()->user()->id)
                         <a href="{{ route('material.edit', $material->slug) }}" class="btn btn-outline-warning mb-2">edit</a>
                     @endif
 
                     @if ($material->user_id == auth()->user()->id || auth()->user()->can('delete-material'))
-                        <a href="" class="btn btn-outline-danger">delete</a>
+                        <form action="{{ route('material.destroy', $material->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <input type="submit" value="Удалить материал" class="btn btn-outline-danger">
+                        </form>
                     @endif
                 </div>
             </div>

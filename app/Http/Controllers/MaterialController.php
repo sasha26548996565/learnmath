@@ -47,4 +47,11 @@ class MaterialController extends Controller
         $material->update($request->validated());
         return to_route('material.show', $material->slug);
     }
+
+    public function destroy(Material $material): RedirectResponse
+    {
+        $material->delete();
+
+        return to_route('index');
+    }
 }

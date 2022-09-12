@@ -18,7 +18,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::patch('/update/{material}', 'MaterialController@update')->name('update');
 
         Route::middleware('permission:delete-material')->group(function () {
-            Route::delete('/delete/{material}', 'MainController@destroy')->name('destroy');
+            Route::delete('/delete/{material}', 'MaterialController@destroy')->name('destroy');
         });
     });
 });
