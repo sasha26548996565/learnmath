@@ -51,7 +51,6 @@ class MaterialController extends Controller
     public function destroy(Material $material): RedirectResponse
     {
         $material->delete();
-
         return to_route('index');
     }
 }
