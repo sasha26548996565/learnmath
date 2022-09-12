@@ -33,4 +33,18 @@ class MaterialController extends Controller
 
         return to_route('material.show', $material->slug);
     }
+
+    public function edit(string $slug): View
+    {
+        $material = Material::where('slug', $slug)->first();
+        $categories = Category::latest()->get();
+
+        return view('material.edit', compact('material', 'categories'));
+    }
+
+    public function update(MaterialRequest $request, Material $material): RedirectResponse
+    {
+        $material->update($request->validated());
+        return to_route('material.show', $material->slug);
+    }
 }

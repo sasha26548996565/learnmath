@@ -11,9 +11,11 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Главная</a>
                 </li>
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('material.create') }}">Добавить материал</a>
-                    </li>
+                    @can('add-material')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('material.create') }}">Добавить материал</a>
+                        </li>
+                    @endcan
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <input type="submit" class="btn btn-outline-dark" value="Выход">
