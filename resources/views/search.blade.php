@@ -13,7 +13,9 @@
 
         <input type="submit" class="btn btn-outline-success" value="Применить">
     </form>
+    <br>
 
+    <h5>Результаты поиска: {{ $_GET['search'] }}</h5>
     @foreach ($materials as $material)
         <div class="card text-center mt-3">
             <div class="card-header">
