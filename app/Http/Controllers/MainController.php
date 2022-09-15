@@ -10,9 +10,15 @@ use Illuminate\Contracts\View\View;
 
 class MainController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $materials = Material::with('category')->latest()->paginate(10);
+        $materialsQuery = Material::query()->with('category')->latest();
+
+        if ($request->has('search'))
+            $materialsQuery->where('name', 'LIKE', '%'. $request->search .'%');
+
+        $materials = $materialsQuery->paginate(10);
+
         return view('index', compact('materials'));
     }
 }

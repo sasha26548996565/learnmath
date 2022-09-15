@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/', 'MainController@index')->name('index');
+    Route::get('/search', 'SearchController@search')->name('search');
 
     Route::name('material.')->prefix('material')->group(function () {
         Route::get('/show/{slug}', 'MaterialController@show')->name('show');
