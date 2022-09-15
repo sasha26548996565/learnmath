@@ -17,6 +17,7 @@ class MaterialRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'content' => 'required',
+            'preview' => 'nullable',
             'category_id' => 'required'
         ];
     }
