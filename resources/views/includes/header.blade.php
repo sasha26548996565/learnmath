@@ -10,6 +10,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Главная</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('category.index') }}" class="nav-link">Категории</a>
+                </li>
                 @auth
                     @can('add-material')
                         <li class="nav-item">

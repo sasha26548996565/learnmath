@@ -22,6 +22,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::delete('/delete/{material}', 'MaterialController@destroy')->name('destroy');
         });
     });
+
+    Route::resource('category', 'CategoryController');
+    Route::post('category/{id}/subscription', 'CategoryController@subscription')->name('category.subscription');
 });
 
 Auth::routes();
