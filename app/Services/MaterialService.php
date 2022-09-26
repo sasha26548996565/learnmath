@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\DTO\MaterialDTO;
+use App\Events\MaterialCreated;
 use App\Models\Material;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,6 +17,7 @@ class MaterialService
             $params->preview = Storage::disk('public')->put('/materials', $params->preview);
 
         $material = Material::create($params->toArray());
+        event(new MaterialCreated($material));
 
         return $material;
     }

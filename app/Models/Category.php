@@ -20,6 +20,11 @@ class Category extends Model
         return $this->hasMany(Material::class, 'category_id', 'id');
     }
 
+    public function user(): Relation
+    {
+        return $this->belongsToMany(User::class, 'subscription_categories', 'category_id', 'user_id');
+    }
+
     public function scopeSlug($query, string $slug): Builder
     {
         return $query->where('slug', $slug);

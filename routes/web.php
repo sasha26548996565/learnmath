@@ -24,7 +24,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 
     Route::resource('category', 'CategoryController');
-    Route::post('category/{id}/subscription', 'CategoryController@subscription')->name('category.subscription');
+    Route::post('category/{category}/subscription', 'CategoryController@subscription')->name('category.subscription');
 });
 
 Auth::routes();

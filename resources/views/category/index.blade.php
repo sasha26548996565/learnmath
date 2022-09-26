@@ -16,11 +16,15 @@
                 </div>
 
                 @auth
-                    <form action="{{ route('category.subscription', $category->id) }}" method="POST">
-                        @csrf
+                    @if(count($category->user) > 0)
+                        подписан
+                    @else
+                        <form action="{{ route('category.subscription', $category->id) }}" method="POST">
+                            @csrf
 
-                        <input type="submit" class="btn btn-info" value="Подписаться на категорию">
-                    </form>
+                            <input type="submit" class="btn btn-info" value="Подписаться на категорию">
+                        </form>
+                    @endif
                 @endauth
 
                 <form action="{{ route('category.destroy', $category->id) }}" method="POST">

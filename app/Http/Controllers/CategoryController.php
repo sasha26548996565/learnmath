@@ -8,8 +8,10 @@ use App\Models\Category;
 use App\Models\Material;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
-use App\Http\Requests\CategoryRequest;
+use App\Models\SubscriptionCategory;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -48,7 +50,7 @@ class CategoryController extends Controller
 
     public function subscription(Category $category): RedirectResponse
     {
-        dd($category);
+        SubscriptionCategory::create(['category_id' => $category->id, 'user_id' => Auth::user()->id]);
         return to_route('category.index');
     }
 }
