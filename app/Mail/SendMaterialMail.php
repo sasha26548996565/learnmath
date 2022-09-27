@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMaterialByCategoryMail extends Mailable
+class SendMaterialMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -23,6 +23,6 @@ class SendMaterialByCategoryMail extends Mailable
 
     public function build()
     {
-        return $this->markdown('mail.material_by_category', ['material' => $this->material]);
+        return $this->markdown('mail.material', ['material' => $this->material]);
     }
 }

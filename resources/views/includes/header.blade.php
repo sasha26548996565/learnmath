@@ -23,6 +23,12 @@
                         @csrf
                         <input type="submit" class="btn btn-outline-dark" value="Выход">
                     </form>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Подписчиков: {{ auth()->user()->subscriptions()->count() }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Подписок: {{ auth()->user()->subscribers()->count() }}</a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a href="{{ route('register') }}" class="nav-link">Регистрация</a>

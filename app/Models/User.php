@@ -36,4 +36,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
+
+    public function subscriptions(): Relation
+    {
+        return $this->belongsToMany(User::class, 'user_subscriptions', 'subscription_id', 'subscriber_id');
+    }
+
+    public function subscribers(): Relation
+    {
+        return $this->belongsToMany(User::class, 'user_subscriptions', 'subscriber_id', 'subscription_id');
+    }
+
+    public function isSubscriped(int $subscriberId): bool
+    {
+        return $this->subscribers->contains($subscriberId) ? true : false;
+    }
 }

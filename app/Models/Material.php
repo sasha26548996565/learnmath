@@ -23,7 +23,7 @@ class Material extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function user(): Relation
+    public function author(): Relation
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }

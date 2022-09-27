@@ -1,5 +1,5 @@
 @component('mail::message')
-Появился новый материал с вашей любимой категорией!
+Появился новый материал!
 
 @component('mail::button', ['url' => route('material.show', $material->slug)])
 Смотреть

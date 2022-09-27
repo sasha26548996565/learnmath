@@ -25,6 +25,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
     Route::resource('category', 'CategoryController');
     Route::post('category/{category}/subscription', 'CategoryController@subscription')->name('category.subscription');
+
+    Route::namespace('Author')->prefix('author/{author}')->name('author.')->group(function () {
+        Route::get('/', 'IndexController')->name('show');
+        Route::get('/subscription/', 'SubscriptionController@subscription')->name('subscription');
+    });
 });
 
 Auth::routes();

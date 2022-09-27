@@ -25,7 +25,7 @@ class MaterialEmailNotification
         {
             if ($subscription->category_id == $event->material->category->id)
             {
-                $this->subscriptionCategory->sendEmailMaterial($event->material);
+                $this->subscriptionCategory->sendNotification($event->material);
             }
         }
     }

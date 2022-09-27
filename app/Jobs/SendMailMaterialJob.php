@@ -8,13 +8,13 @@ use App\Models\Material;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendMaterialByCategoryMail;
+use App\Mail\SendMaterialMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
-class SendMailMaterialByCategoryJob implements ShouldQueue
+class SendMailMaterialJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -29,6 +29,6 @@ class SendMailMaterialByCategoryJob implements ShouldQueue
 
     public function handle()
     {
-        Mail::to($this->email)->send(new SendMaterialByCategoryMail($this->material));
+        Mail::to($this->email)->send(new SendMaterialMail($this->material));
     }
 }
