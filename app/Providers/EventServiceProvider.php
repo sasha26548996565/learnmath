@@ -7,7 +7,7 @@ use App\Events\UserSubscriped;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\MaterialEmailNotification;
-use App\Listeners\UserSubscripeListener;
+use App\Listeners\UserSubscripeNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
 
         MaterialCreated::class => [
             MaterialEmailNotification::class,
-            UserSubscripeListener::class
+            UserSubscripeNotification::class
         ]
     ];
 
