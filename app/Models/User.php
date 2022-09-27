@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function isSubscriped(int $subscriberId): bool
     {
-        return $this->subscribers->contains($subscriberId) ? true : false;
+        return $this->subscribers->contains($subscriberId);
     }
 }
