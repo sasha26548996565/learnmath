@@ -27,6 +27,9 @@
                             <input type="submit" value="Удалить материал" class="btn btn-outline-danger">
                         </form>
                     @endif
+
+                    <a href="{{ route('favourite.toggleActive', $material->id) }}">
+                        {{ auth()->user()->hasFavourite($material->id) ? 'Удалить из избранного' : 'В избранное' }}</a>
                 </div>
             </div>
         </div>

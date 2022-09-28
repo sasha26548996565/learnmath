@@ -30,6 +30,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::get('/', 'IndexController')->name('show');
         Route::get('/subscription/', 'SubscriptionController@subscription')->name('subscription');
     });
+
+    Route::controller('FavouriteController')->prefix('favourites/')->name('favourite.')->group(function () {
+        Route::middleware('favourite_not_empty')->get('/', 'index')->name('index');
+        Route::get('/toggle-active/{material}', 'toggleActive')->name('toggleActive');
+    });
 });
 
 Auth::routes();

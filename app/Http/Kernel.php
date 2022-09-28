@@ -66,5 +66,7 @@ class Kernel extends HttpKernel
 
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+
+        'favourite_not_empty' => \App\Http\Middleware\FavouriteNotEmptyMiddleware::class,
     ];
 }

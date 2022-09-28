@@ -47,8 +47,18 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'user_subscriptions', 'subscriber_id', 'subscription_id');
     }
 
+    public function favouriteMaterials(): Relation
+    {
+        return $this->belongsToMany(Material::class, 'favourites', 'user_id', 'material_id');
+    }
+
     public function isSubscriped(int $subscriberId): bool
     {
         return $this->subscribers->contains($subscriberId);
+    }
+
+    public function hasFavourite(int $materialId): bool
+    {
+        return $this->favouriteMaterials->contains($materialId);
     }
 }

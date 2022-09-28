@@ -37,6 +37,9 @@
                         <a href="{{ route('login') }}" class="nav-link">Вход</a>
                     </li>
                 @endauth
+                <li class="nav-item">
+                    <a href="{{ route('favourite.index') }}" class="nav-link">Избранное</a>
+                </li>
             </ul>
             <form class="d-flex" action="{{ route('search') }}" method="GET">
                 <input class="form-control me-2" type="search" name="search" value="{{ $_GET['search'] ?? '' }}" placeholder="Search" aria-label="Search">
