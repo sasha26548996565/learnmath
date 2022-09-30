@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::namespace('App\Http\Controllers')->group(function () {
+Route::namespace('App\Http\Controllers')->middleware('verified')->group(function () {
     Route::get('/', 'MainController@index')->name('index');
     Route::get('/search', 'SearchController@search')->name('search');
 
@@ -37,4 +37,4 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);

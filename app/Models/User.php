@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\SendEmailVerificationNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -50,6 +51,11 @@ class User extends Authenticatable
     public function favouriteMaterials(): Relation
     {
         return $this->belongsToMany(Material::class, 'favourites', 'user_id', 'material_id');
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new SendEmailVerificationNotification());
     }
 
     public function isSubscriped(int $subscriberId): bool
