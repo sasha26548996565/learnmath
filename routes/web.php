@@ -1,22 +1,40 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::namespace('App\Http\Controllers')->middleware('verified')->group(function () {
+    Route::get('/', 'MainController@index')->name('index');
+    Route::get('/search', 'SearchController@search')->name('search');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::name('material.')->prefix('material')->group(function () {
+        Route::get('/show/{slug}', 'MaterialController@show')->name('show');
+
+        Route::middleware('permission:add-material')->group(function () {
+            Route::get('/create', 'MaterialController@create')->name('create');
+            Route::post('/store', 'MaterialController@store')->name('store');
+        });
+
+        Route::get('/edit/{slug}', 'MaterialController@edit')->name('edit');
+        Route::patch('/update/{material}', 'MaterialController@update')->name('update');
+
+        Route::middleware('permission:delete-material')->group(function () {
+            Route::delete('/delete/{material}', 'MaterialController@destroy')->name('destroy');
+        });
+    });
+
+    Route::resource('category', 'CategoryController');
+    Route::post('category/{category}/subscription', 'CategoryController@subscription')->name('category.subscription');
+
+    Route::namespace('Author')->prefix('author/{author}')->name('author.')->group(function () {
+        Route::get('/', 'IndexController')->name('show');
+        Route::get('/subscription/', 'SubscriptionController@subscription')->name('subscription');
+    });
+
+    Route::controller('FavouriteController')->prefix('favourites/')->name('favourite.')->group(function () {
+        Route::middleware('favourite_not_empty')->get('/', 'index')->name('index');
+        Route::get('/toggle-active/{material}', 'toggleActive')->name('toggleActive');
+    });
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes(['verify' => true]);
