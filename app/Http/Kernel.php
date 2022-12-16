@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
 
         'favourite_not_empty' => \App\Http\Middleware\FavouriteNotEmptyMiddleware::class,
+        'bearer-token' => \App\Http\Middleware\Api\CheckBearerTokenMiddleware::class,
     ];
 }
