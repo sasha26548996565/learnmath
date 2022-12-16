@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\DTO\MaterialDTO;
-use App\Events\MaterialCreated;
 use App\Models\Material;
+use App\Events\MaterialCreated;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class MaterialService
@@ -16,7 +17,7 @@ class MaterialService
         if (isset($params->preview))
             $params->preview = Storage::disk('public')->put('/materials', $params->preview);
 
-        $material = Material::create($params->toArray());
+        $material = Material::create(array_merge(['user_id' => Auth::user()->id], $params->toArray()));
         event(new MaterialCreated($material));
 
         return $material;

@@ -39,7 +39,6 @@ class Material extends Model
 
         static::creating(function ($material) {
             $material->slug = Str::slug($material->name) . '-' . now()->format('YmdHis');
-            $material->user_id = Auth::user()->id;
         });
 
         static::updating(function ($material) {
