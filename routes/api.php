@@ -9,11 +9,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('bearer-token')->apiResource('materials', MaterialController::class);
+Route::middleware('auth:api')->apiResource('materials', MaterialController::class);
 
 Route::post('/register', [UserController::class, 'register'])->name('api.register');
 Route::post('/login', [UserController::class, 'login'])->name('api.login');
 
-Route::middleware('bearer-token')->get('/info', function () {
+Route::middleware('auth:api')->get('/info', function () {
     return 'ivlmobatmr';
 });

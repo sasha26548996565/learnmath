@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Api\User\LoginRequest;
 use App\Http\Requests\Api\User\RegisterRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,17 +30,12 @@ class UserController extends Controller
     public function login(LoginRequest $request): JsonResponse
     {
         $params = $request->validated();
-        $user = User::where('email', $params['email'])->first();
 
-        if (is_null($user))
-            return response()->json(['status' => false, 'message' => 'User not found'], Response::HTTP_UNAUTHORIZED);
+        if (! Auth::attempt(['login' => $params['login'], 'password' => $params['password']]))
+            return response()->json(['status' => false, 'message' => 'user not found']);
 
-        if (! Hash::check($params['password'], $user->password))
-            return response()->json(['status' => false, 'message' => 'Password not correct']);
-
-        $token = Str::random(self::LENGTH_TOKEN);
-        $user->token = $token;
-        $user->save();
+        $user = Auth::user();
+        $token = $user->createToken('Test')->asseccToken;
 
         return response()->json(['status' => true, 'token' => $token]);
     }
