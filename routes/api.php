@@ -14,6 +14,6 @@ Route::middleware('auth:api')->apiResource('materials', MaterialController::clas
 Route::post('/register', [UserController::class, 'register'])->name('api.register');
 Route::post('/login', [UserController::class, 'login'])->name('api.login');
 
-Route::middleware('auth:api')->get('/info', function () {
+Route::middleware('auth:sanctum')->get('/info', function () {
     return 'ivlmobatmr';
 });

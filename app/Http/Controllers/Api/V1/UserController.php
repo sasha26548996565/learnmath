@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    private const LENGTH_TOKEN = 150;
-
     public function register(RegisterRequest $request): JsonResponse
     {
         $params = $request->validated();
@@ -31,11 +29,11 @@ class UserController extends Controller
     {
         $params = $request->validated();
 
-        if (! Auth::attempt(['login' => $params['login'], 'password' => $params['password']]))
+        if (! Auth::attempt(['email' => $params['email'], 'password' => $params['password']]))
             return response()->json(['status' => false, 'message' => 'user not found']);
 
         $user = Auth::user();
-        $token = $user->createToken('Test')->asseccToken;
+        $token = $user->createToken('Sanctum');
 
         return response()->json(['status' => true, 'token' => $token]);
     }
