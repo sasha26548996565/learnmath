@@ -35,6 +35,13 @@ Route::namespace('App\Http\Controllers')->middleware('verified')->group(function
         Route::middleware('favourite_not_empty')->get('/', 'index')->name('index');
         Route::get('/toggle-active/{material}', 'toggleActive')->name('toggleActive');
     });
+
+    Route::get('/cart-index', 'CartController@index')->name('cart.index');
+    Route::post('/cart-add/{material}', 'CartController@add')->name('cart.add');
+    Route::post('/cart-update/{material}', 'CartController@update')->name('cart.update');
+    Route::post('/cart-remove/{material}', 'CartController@remove')->name('cart.remove');
+
+    Route::get('/locale', 'LocationController@swapLanguage')->name('swapLanguage');
 });
 
 Auth::routes(['verify' => true]);

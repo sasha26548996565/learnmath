@@ -5,8 +5,23 @@
 @section('content')
     <div class="card text-center mt-3">
         <div class="card-header">
-            {{ $material->category->name }}
+            {{ $material->category->name }} <br>
+            <form action="{{ route('cart.add', $material) }}" method="POST">
+                @csrf
+                <input type="number" name="quantity" required>
+                <input type="submit" value="add-cart">
+            </form>
+            <form action="{{ route('cart.update', $material) }}" method="POST">
+                @csrf
+                <input type="number" name="quantity" required>
+                <input type="submit" value="update-cart">
+            </form>
+            <form action="{{ route('cart.remove', $material) }}" method="POST">
+                @csrf
+                <input type="submit" value="remove element">
+            </form>
         </div>
+
         <div class="card-body">
             <div class="row">
                 <div class="col-md-10">
